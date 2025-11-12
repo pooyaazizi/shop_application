@@ -24,7 +24,7 @@ class _CategoryScreenState
   void initState() {
     super.initState();
     context.read<CategoryBloc>().add(
-      CategoryRequest(),
+      CategoryRequestEvent(),
     );
   }
 
@@ -33,97 +33,42 @@ class _CategoryScreenState
     return Scaffold(
       backgroundColor: AppColors.backgroundScreenColor,
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            context.read<CategoryBloc>().add(
-              CategoryRequest(),
-            );
-          },
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    right: 44,
-                    left: 44,
-                    top: 20,
-                  ),
-                  child: Container(
-                    height: 46,
-                    decoration: const BoxDecoration(
-                      color: AppColors.whiteColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(width: 16),
-                        Image.asset(
-                          'assets/images/icon_apple_blue.png',
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'دسته بندی',
-                            textAlign:
-                                TextAlign.center,
-                            style: AppTextStyle.sb
-                                .copyWith(
-                                  fontSize: 16,
-                                  color: AppColors
-                                      .blueColor,
-                                ),
-                          ),
-                        ),
-
-                        const SizedBox(width: 38),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              BlocBuilder<CategoryBloc, CategoryState>(
-                builder: (context, state) {
-                  return _buildbyState(state, context);
-                },
-              ),
-            ],
-          ),
-        ),
+        child:
+            BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                return _buildbyState(context, state);
+              },
+            ),
       ),
     );
   }
 
   Widget _buildbyState(
-    CategoryState state,
     BuildContext context,
+    CategoryState state,
   ) {
     switch (state) {
       case CategoryInitiateState():
-        return SliverToBoxAdapter(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: const Center(
-              child: SpinKitCircle(
-                color: AppColors.blueColor,
-                size: 50.0,
-              ),
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+
+          child: const Center(
+            child: SpinKitCircle(
+              color: AppColors.blueColor,
+              size: 50.0,
             ),
           ),
         );
 
       case CategoryLoadingState():
-        return SliverToBoxAdapter(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: const Center(
-              child: SpinKitCircle(
-                color: AppColors.blueColor,
-                size: 50.0,
-              ),
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: const Center(
+            child: SpinKitCircle(
+              color: AppColors.blueColor,
+              size: 50.0,
             ),
           ),
         );
@@ -139,7 +84,7 @@ class _CategoryScreenState
             );
           },
           (categoryList) {
-            return _ListCategory(
+            return CategoryContent(
               categoryList: categoryList,
             );
           },
@@ -150,6 +95,74 @@ class _CategoryScreenState
           return const SizedBox.shrink();
         }
     }
+  }
+}
+
+class CategoryContent extends StatelessWidget {
+  List<CategoryEntity> categoryList;
+  CategoryContent({
+    super.key,
+    required this.categoryList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<CategoryBloc>().add(
+          CategoryRequestEvent(),
+        );
+      },
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 44,
+                left: 44,
+                top: 20,
+              ),
+              child: Container(
+                height: 46,
+                decoration: const BoxDecoration(
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                ),
+                child: Row(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 16),
+                    Image.asset(
+                      'assets/images/icon_apple_blue.png',
+                    ),
+
+                    Expanded(
+                      child: Text(
+                        'دسته بندی',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyle.sb
+                            .copyWith(
+                              fontSize: 16,
+                              color:
+                                  AppColors.blueColor,
+                            ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 38),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          _ListCategory(categoryList: categoryList),
+        ],
+      ),
+    );
   }
 }
 

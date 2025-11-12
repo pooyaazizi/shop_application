@@ -13,43 +13,49 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
 
-      margin: EdgeInsets.all(44),
+          margin: EdgeInsets.all(44),
 
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
+          decoration: BoxDecoration(
+            color: AppColors.whiteColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: Image.asset(
+                  'assets/images/icon_error.webp',
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+
+              SizedBox(height: 24),
+
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.sb.copyWith(
+                  fontSize: 16,
+                  color: AppColors.redColor,
+                ),
+              ),
+
+              SizedBox(height: 24),
+            ],
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            child: Image.asset(
-              'assets/images/icon_error.webp',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-
-          SizedBox(height: 24),
-
-          Text(
-            message,
-            textAlign: TextAlign.center,
-            style: AppTextStyle.sb.copyWith(
-              fontSize: 16,
-              color: AppColors.redColor,
-            ),
-          ),
-
-          SizedBox(height: 24),
-        ],
       ),
     );
   }

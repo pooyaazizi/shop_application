@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/error/api_exception.dart';
 import 'package:shop_application/core/utils/auth_manager.dart';
@@ -51,8 +50,6 @@ class AuthenticationRepositoryImpl
       }
     } on ApiException catch (ex) {
       return left('${ex.message}');
-    } catch (ex) {
-      return left('خطا هنگام ورود');
     }
   }
 }

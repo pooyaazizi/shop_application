@@ -9,6 +9,7 @@ class CachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
+      clipBehavior: Clip.antiAlias,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,

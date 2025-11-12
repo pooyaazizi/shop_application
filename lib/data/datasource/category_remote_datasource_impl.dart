@@ -13,7 +13,7 @@ class CategoryRemoteDatasource
   @override
   Future<List<CategoryEntity>> getCategories() async {
     try {
-      var response = await _dio.get(
+      final response = await _dio.get(
         ApiConstants.categoryEndpoint,
       );
       List<CategoryDto> categoryDtos = response

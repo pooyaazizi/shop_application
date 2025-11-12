@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
+import 'package:shop_application/domain/entities/banner_entity.dart';
+import 'package:shop_application/widgets/cached_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BannerSlider extends StatelessWidget {
-  const BannerSlider({super.key});
+  List<BannerEntity>? bannerEntityList;
+  BannerSlider({
+    super.key,
+    required this.bannerEntityList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class BannerSlider extends StatelessWidget {
           height: 171,
           child: PageView.builder(
             controller: controller,
-            itemCount: 6,
+            itemCount: bannerEntityList?.length ?? 0,
             itemBuilder: (contest, index) {
               return Padding(
                 padding: const EdgeInsets.only(
@@ -26,11 +32,17 @@ class BannerSlider extends StatelessWidget {
                 ),
                 child: Container(
                   height: 171,
-
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     color: AppColors.redColor,
                     borderRadius:
                         BorderRadius.circular(16),
+                  ),
+                  child: CachedImage(
+                    imageUrl:
+                        bannerEntityList?[index]
+                            .thumbnail ??
+                        '',
                   ),
                 ),
               );
@@ -42,7 +54,7 @@ class BannerSlider extends StatelessWidget {
           bottom: 8,
           child: SmoothPageIndicator(
             controller: controller,
-            count: 6,
+            count: bannerEntityList?.length ?? 0,
             effect: ExpandingDotsEffect(
               expansionFactor: 5,
               dotWidth: 5,

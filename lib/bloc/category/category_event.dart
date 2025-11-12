@@ -1,3 +1,3 @@
 abstract class CategoryEvent {}
 
-class CategoryRequest implements CategoryEvent {}
+class CategoryRequestEvent implements CategoryEvent {}

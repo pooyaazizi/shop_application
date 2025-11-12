@@ -10,7 +10,7 @@ class CategoryBloc
       locator.get();
 
   CategoryBloc() : super(CategoryInitiateState()) {
-    on<CategoryRequest>((event, emit) async {
+    on<CategoryRequestEvent>((event, emit) async {
       emit(CategoryLoadingState());
       final response = await categoryRepository
           .getCategories();
