@@ -41,4 +41,76 @@ class ProductRemoteDatasourceImpl
       );
     }
   }
+
+  @override
+  Future<List<ProductEntity>>
+  getBestSellerProducts() async {
+    try {
+      Map<String, String> queryParam = {
+        'filter': 'popularity="Best Seller"',
+      };
+      final response = await _dio.get(
+        ApiConstants.productEndpoint,
+        queryParameters: queryParam,
+      );
+
+      final List<ProductDto> productDtos = response
+          .data['items']
+          .map<ProductDto>(
+            (jsonMapObject) =>
+                ProductDto.fromMapJson(jsonMapObject),
+          )
+          .toList();
+
+      final List<ProductEntity> productList =
+          ProductMapper.toDomainList(productDtos);
+      return productList;
+    } on DioException catch (ex) {
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
+    } catch (ex) {
+      throw ApiException(
+        0,
+        'An unknown error occurred while loading the products',
+      );
+    }
+  }
+
+  @override
+  Future<List<ProductEntity>>
+  getHotestProducts() async {
+    try {
+      Map<String, String> queryParam = {
+        'filter': 'popularity="Hotest"',
+      };
+      final response = await _dio.get(
+        ApiConstants.productEndpoint,
+        queryParameters: queryParam,
+      );
+
+      final List<ProductDto> productDtos = response
+          .data['items']
+          .map<ProductDto>(
+            (jsonMapObject) =>
+                ProductDto.fromMapJson(jsonMapObject),
+          )
+          .toList();
+
+      final List<ProductEntity> productList =
+          ProductMapper.toDomainList(productDtos);
+      return productList;
+    } on DioException catch (ex) {
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
+    } catch (ex) {
+      throw ApiException(
+        0,
+        'An unknown error occurred while loading the products',
+      );
+    }
+  }
 }

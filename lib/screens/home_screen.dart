@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Center(
+          child: const Center(
             child: SpinKitCircle(
               size: 50,
               color: AppColors.blueColor,
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Center(
+          child: const Center(
             child: SpinKitCircle(
               size: 50,
               color: AppColors.blueColor,
@@ -79,6 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
         final bannerResult = state.bannerList;
         final categoryResult = state.categoryList;
         final productResult = state.productList;
+        final bestSellerProductResult =
+            state.bestSellerProductList;
+        final hotestProductResult =
+            state.hotestProductList;
 
         if (bannerResult.isLeft() &&
             categoryResult.isLeft() &&
@@ -111,6 +115,22 @@ class _HomeScreenState extends State<HomeScreen> {
               (_) => '',
             ),
           );
+        } else if (bestSellerProductResult.isLeft()) {
+          return CustomErrorWidget(
+            context: context,
+            message: bannerResult.fold(
+              (error) => error,
+              (_) => '',
+            ),
+          );
+        } else if (hotestProductResult.isLeft()) {
+          return CustomErrorWidget(
+            context: context,
+            message: bannerResult.fold(
+              (error) => error,
+              (_) => '',
+            ),
+          );
         } else {
           return HomeContent(
             bannerList: bannerResult.getOrElse(
@@ -123,6 +143,14 @@ class _HomeScreenState extends State<HomeScreen> {
             productList: productResult.getOrElse(
               () => [],
             ),
+
+            bestSellerProductList:
+                bestSellerProductResult.getOrElse(
+                  () => [],
+                ),
+
+            hotestProductList: hotestProductResult
+                .getOrElse(() => []),
           );
         }
 
@@ -138,11 +166,16 @@ class HomeContent extends StatelessWidget {
   List<BannerEntity> bannerList;
   List<CategoryEntity> categoryList;
   List<ProductEntity> productList;
+  List<ProductEntity> bestSellerProductList;
+  List<ProductEntity> hotestProductList;
+
   HomeContent({
     super.key,
     required this.bannerList,
     required this.categoryList,
     required this.productList,
+    required this.bestSellerProductList,
+    required this.hotestProductList,
   });
 
   @override
@@ -165,11 +198,16 @@ class HomeContent extends StatelessWidget {
 
           _getBestSellerTitle(),
 
-          _getBestSellerProducts(),
+          _getBestSellerProducts(
+            bestSellerProductList:
+                bestSellerProductList,
+          ),
 
           _getMostViewedTitle(),
 
-          _getMostViewedProducts(),
+          _getMostViewedProducts(
+            hotestProductList: hotestProductList,
+          ),
         ],
       ),
     );
@@ -177,7 +215,11 @@ class HomeContent extends StatelessWidget {
 }
 
 class _getMostViewedProducts extends StatelessWidget {
-  const _getMostViewedProducts({super.key});
+  List<ProductEntity> hotestProductList;
+  _getMostViewedProducts({
+    super.key,
+    required this.hotestProductList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -191,14 +233,16 @@ class _getMostViewedProducts extends StatelessWidget {
             child: ListView.builder(
               clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,
-              itemCount: 6,
+              itemCount: hotestProductList.length,
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(
+                return Padding(
+                  padding: const EdgeInsets.only(
                     left: 20,
                     top: 20,
                   ),
-                  child: ProductItem(),
+                  child: ProductItem(
+                    product: hotestProductList[index],
+                  ),
                 );
               },
             ),
@@ -252,7 +296,11 @@ class _getMostViewedTitle extends StatelessWidget {
 }
 
 class _getBestSellerProducts extends StatelessWidget {
-  const _getBestSellerProducts({super.key});
+  List<ProductEntity> bestSellerProductList;
+  _getBestSellerProducts({
+    super.key,
+    required this.bestSellerProductList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -264,11 +312,16 @@ class _getBestSellerProducts extends StatelessWidget {
           child: ListView.builder(
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
-            itemCount: 6,
+            itemCount: bestSellerProductList.length,
             itemBuilder: (context, index) {
-              return const Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: ProductItem(),
+              return Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: ProductItem(
+                  product:
+                      bestSellerProductList[index],
+                ),
               );
             },
           ),
@@ -339,7 +392,7 @@ class _getCategoryList extends StatelessWidget {
             itemCount: categoryList.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   top: 20,
                   left: 20,
                 ),

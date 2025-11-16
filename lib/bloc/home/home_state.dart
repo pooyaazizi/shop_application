@@ -13,9 +13,15 @@ class HomeRequestSuccessState implements HomeState {
   Either<String, List<BannerEntity>> bannerList;
   Either<String, List<CategoryEntity>> categoryList;
   Either<String, List<ProductEntity>> productList;
+  Either<String, List<ProductEntity>>
+  bestSellerProductList;
+  Either<String, List<ProductEntity>>
+  hotestProductList;
   HomeRequestSuccessState(
     this.bannerList,
     this.categoryList,
     this.productList,
+    this.bestSellerProductList,
+    this.hotestProductList,
   );
 }

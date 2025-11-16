@@ -25,11 +25,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final productResponse = await productRepository
           .getProducts();
 
+      final bestSellerProductResponse =
+          await productRepository
+              .getBestSellerProducts();
+
+      final hotestProductResponse =
+          await productRepository.getHotestProducts();
+
       emit(
         HomeRequestSuccessState(
           bannerResponse,
           categoryResponse,
           productResponse,
+          bestSellerProductResponse,
+          hotestProductResponse,
         ),
       );
     });

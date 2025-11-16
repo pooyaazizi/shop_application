@@ -7,17 +7,16 @@ class ProductMapper {
     ProductDto productDto,
   ) {
     final int realPrice =
-        (productDto.price ?? 0) +
+        (productDto.price ?? 0) -
         (productDto.discountPrice ?? 0);
 
-    final int discountPercent =
+    final double discountPercent =
         (productDto.price != null &&
             productDto.price! > 0)
         ? (((productDto.price! - realPrice) /
-                      productDto.price!) *
-                  100)
-              .round()
-        : 0;
+                  productDto.price!) *
+              100)
+        : 0.0;
 
     return ProductEntity(
       productDto.category ?? 'N/A',

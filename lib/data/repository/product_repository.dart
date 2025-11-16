@@ -4,4 +4,10 @@ import 'package:shop_application/domain/entities/product_entity.dart';
 abstract class IProductRepository {
   Future<Either<String, List<ProductEntity>>>
   getProducts();
+
+  Future<Either<String, List<ProductEntity>>>
+  getBestSellerProducts();
+
+  Future<Either<String, List<ProductEntity>>>
+  getHotestProducts();
 }

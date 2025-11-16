@@ -11,7 +11,7 @@ class ProductEntity {
   int quantity;
   String thumbnail;
   int realPrice;
-  int discountPercent;
+  double discountPercent;
 
   ProductEntity(
     this.category,

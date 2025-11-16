@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
+import 'package:shop_application/domain/entities/product_entity.dart';
 import 'package:shop_application/widgets/product_item.dart';
 
 class ProductListScreen extends StatelessWidget {
-  const ProductListScreen({super.key});
+  List<ProductEntity> productList;
+  ProductListScreen({
+    super.key,
+    required this.productList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +72,9 @@ class ProductListScreen extends StatelessWidget {
                   context,
                   index,
                 ) {
-                  return ProductItem();
+                  return ProductItem(
+                    product: productList[index],
+                  );
                 }),
                 gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
+import 'package:shop_application/core/utils/number_extension.dart';
+import 'package:shop_application/domain/entities/product_entity.dart';
+import 'package:shop_application/widgets/cached_image.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  ProductEntity product;
+  ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +27,12 @@ class ProductItem extends StatelessWidget {
               child: Stack(
                 alignment: AlignmentDirectional.center,
                 children: [
-                  SizedBox(width: double.infinity),
+                  const SizedBox(
+                    width: double.infinity,
+                  ),
 
-                  Image.asset(
-                    'assets/images/iphone.png',
+                  CachedImage(
+                    imageUrl: product.thumbnail,
                   ),
 
                   Positioned(
@@ -41,30 +47,40 @@ class ProductItem extends StatelessWidget {
                     ),
                   ),
 
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.redColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(7.5),
-                        ),
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(
-                              vertical: 2,
-                              horizontal: 6,
+                  Visibility(
+                    visible:
+                        product.discountPercent > 0.01,
+                    child: Positioned(
+                      bottom: 0,
+                      left: 0,
+                      child: Container(
+                        decoration:
+                            const BoxDecoration(
+                              color:
+                                  AppColors.redColor,
+                              borderRadius:
+                                  BorderRadius.all(
+                                    Radius.circular(
+                                      7.5,
+                                    ),
+                                  ),
                             ),
-                        child: Text(
-                          '%3',
-                          style: AppTextStyle.sm
-                              .copyWith(
-                                color: AppColors
-                                    .whiteColor,
-                                fontSize: 10,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 6,
                               ),
+                          child: Text(
+                            product.discountPercent
+                                .toPercent(),
+                            style: AppTextStyle.sm
+                                .copyWith(
+                                  color: AppColors
+                                      .whiteColor,
+                                  fontSize: 10,
+                                ),
+                          ),
                         ),
                       ),
                     ),
@@ -78,11 +94,11 @@ class ProductItem extends StatelessWidget {
             crossAxisAlignment:
                 CrossAxisAlignment.start,
             children: [
-              SizedBox(width: double.infinity),
+              const SizedBox(width: double.infinity),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  'آیفون 13 پرومکس',
+                  product.name,
                   style: AppTextStyle.sm.copyWith(
                     fontSize: 14,
                     color: AppColors.blackColor,
@@ -94,7 +110,7 @@ class ProductItem extends StatelessWidget {
 
           Container(
             height: 52,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(15),
                 bottomRight: Radius.circular(15),
@@ -123,7 +139,7 @@ class ProductItem extends StatelessWidget {
                     ),
                   ),
 
-                  Spacer(),
+                  const Spacer(),
 
                   Column(
                     mainAxisAlignment:
@@ -132,7 +148,7 @@ class ProductItem extends StatelessWidget {
                         CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '95,000,000',
+                        product.price.toSeparated(),
                         style: AppTextStyle.sm
                             .copyWith(
                               fontSize: 12,
@@ -147,7 +163,9 @@ class ProductItem extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        '93,500,000',
+                        product.realPrice
+                            .toSeparated(),
+
                         style: AppTextStyle.sm
                             .copyWith(
                               fontSize: 16,
@@ -158,7 +176,7 @@ class ProductItem extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
 
                   Text(
                     'تومان',

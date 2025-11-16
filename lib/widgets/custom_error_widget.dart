@@ -5,7 +5,7 @@ import 'package:shop_application/core/theme/app_text_style.dart';
 class CustomErrorWidget extends StatelessWidget {
   final BuildContext context;
   final String message;
-  CustomErrorWidget({
+  const CustomErrorWidget({
     super.key,
     required this.context,
     required this.message,
@@ -20,9 +20,9 @@ class CustomErrorWidget extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
 
-          margin: EdgeInsets.all(44),
+          margin: const EdgeInsets.all(44),
 
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.whiteColor,
             borderRadius: BorderRadius.all(
               Radius.circular(15),
@@ -31,7 +31,7 @@ class CustomErrorWidget extends StatelessWidget {
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
                 ),
@@ -41,7 +41,7 @@ class CustomErrorWidget extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               Text(
                 message,
@@ -52,7 +52,7 @@ class CustomErrorWidget extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
             ],
           ),
         ),
