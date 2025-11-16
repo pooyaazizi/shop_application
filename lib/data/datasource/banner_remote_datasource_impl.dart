@@ -24,7 +24,9 @@ class BannerRemoteDatasourceImpl
           )
           .toList();
 
-      return BannerMapper.toDomainList(bannerDtoList);
+      final List<BannerEntity> bannerList =
+          BannerMapper.toDomainList(bannerDtoList);
+      return bannerList;
     } on DioException catch (ex) {
       throw ApiException(
         ex.response?.statusCode,

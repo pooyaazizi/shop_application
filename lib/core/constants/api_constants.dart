@@ -16,4 +16,7 @@ class ApiConstants {
 
   static const String bannerEndpoint =
       'collections/banner/records';
+
+  static const String productEndpoint =
+      'collections/products/records';
 }

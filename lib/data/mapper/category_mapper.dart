@@ -12,7 +12,7 @@ class CategoryMapper {
       categoryDto.collectionId ?? 'N/A',
       categoryDto.title ?? 'N/A',
       categoryDto.color ?? 'N/A',
-      categoryDto.icon ?? 'N/A',
+      '${ApiConstants.baseUrl}files/${categoryDto.collectionId}/${categoryDto.id}/${categoryDto.icon}',
       '${ApiConstants.baseUrl}files/${categoryDto.collectionId}/${categoryDto.id}/${categoryDto.thumbnail}',
     );
   }

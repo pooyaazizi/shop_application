@@ -75,7 +75,8 @@ class ProductItem extends StatelessWidget {
           ),
 
           Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment:
+                CrossAxisAlignment.start,
             children: [
               SizedBox(width: double.infinity),
               Padding(
@@ -114,19 +115,21 @@ class ProductItem extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Text(
-                    'تومان',
-                    style: AppTextStyle.sm.copyWith(
-                      fontSize: 12,
-                      color: AppColors.whiteColor,
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Image.asset(
+                      'assets/images/icon_right_arrow_cricle.png',
                     ),
                   ),
-                  SizedBox(width: 5),
+
+                  Spacer(),
+
                   Column(
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                        CrossAxisAlignment.end,
                     children: [
                       Text(
                         '95,000,000',
@@ -154,12 +157,14 @@ class ProductItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Image.asset(
-                      'assets/images/icon_right_arrow_cricle.png',
+
+                  SizedBox(width: 5),
+
+                  Text(
+                    'تومان',
+                    style: AppTextStyle.sm.copyWith(
+                      fontSize: 12,
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ],
