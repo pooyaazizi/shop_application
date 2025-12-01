@@ -76,11 +76,9 @@ class _CategoryScreenState
       case CategoryResponseState():
         return state.response.fold(
           (errorMessage) {
-            return SliverToBoxAdapter(
-              child: CustomErrorWidget(
-                context: context,
-                message: errorMessage,
-              ),
+            return CustomErrorWidget(
+              context: context,
+              message: errorMessage,
             );
           },
           (categoryList) {

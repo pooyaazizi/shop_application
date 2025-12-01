@@ -19,4 +19,16 @@ class ApiConstants {
 
   static const String productEndpoint =
       'collections/products/records';
+
+  static const String galleryEndpoint =
+      'collections/gallery/records';
+
+  static const String variantTypeEndpoint =
+      'collections/variants_type/records';
+
+  static const String varientEndpoint =
+      'collections/variants/records';
+
+  static const String productPropertyEndpoint =
+      'collections/properties/records';
 }

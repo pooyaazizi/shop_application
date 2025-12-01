@@ -80,7 +80,7 @@ class ProductRemoteDatasourceImpl
 
   @override
   Future<List<ProductEntity>>
-  getHotestProducts() async {
+  getHottestProducts() async {
     try {
       Map<String, String> queryParam = {
         'filter': 'popularity="Hotest"',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
+import 'package:shop_application/core/utils/string_to_color_extention.dart';
 import 'package:shop_application/domain/entities/category_entity.dart';
 import 'package:shop_application/widgets/cached_image.dart';
 
@@ -13,8 +14,6 @@ class CategoryIconItemChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String categoryColor = 'ff${category.color}';
-    int hexColor = int.parse(categoryColor, radix: 16);
     return Column(
       children: [
         Stack(
@@ -24,10 +23,10 @@ class CategoryIconItemChip extends StatelessWidget {
               width: 56,
               height: 56,
               decoration: ShapeDecoration(
-                color: Color(hexColor),
+                color: category.color.toColor(),
                 shadows: [
                   BoxShadow(
-                    color: Color(hexColor),
+                    color: category.color.toColor(),
                     blurRadius: 25,
                     spreadRadius: -12,
                     offset: const Offset(0.0, 12),
@@ -45,8 +44,10 @@ class CategoryIconItemChip extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: CachedImage(
-                imageUrl: category.icon,
+              child: Center(
+                child: CachedImage(
+                  imageUrl: category.icon,
+                ),
               ),
             ),
           ],

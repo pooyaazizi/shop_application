@@ -9,6 +9,9 @@ import 'package:shop_application/data/datasource/banner_remote_datasource_impl.d
 import 'package:shop_application/data/datasource/category_datasource.dart';
 import 'package:shop_application/data/datasource/category_remote_datasource_impl.dart';
 import 'package:shop_application/data/datasource/product_datasource.dart';
+import 'package:shop_application/data/datasource/product_detail_datasource.dart';
+import 'package:shop_application/data/datasource/product_detail_remote_datasource_impl.dart';
+import 'package:shop_application/data/datasource/product_property_datasourse.dart';
 import 'package:shop_application/data/datasource/product_remote_datasource_impl.dart';
 import 'package:shop_application/data/repository/authentication_repository.dart';
 import 'package:shop_application/data/repository/authentication_repository_impl.dart';
@@ -16,6 +19,8 @@ import 'package:shop_application/data/repository/banner_repository.dart';
 import 'package:shop_application/data/repository/banner_repository_impl.dart';
 import 'package:shop_application/data/repository/category_repository.dart';
 import 'package:shop_application/data/repository/category_repository_impl.dart';
+import 'package:shop_application/data/repository/product_detail_repository.dart';
+import 'package:shop_application/data/repository/product_detail_repository_impl.dart';
 import 'package:shop_application/data/repository/product_repository.dart';
 import 'package:shop_application/data/repository/product_repository_impl.dart';
 
@@ -49,6 +54,10 @@ Future<void> setupLocator() async {
   locator.registerFactory<IProductDatasource>(
     () => ProductRemoteDatasourceImpl(),
   );
+  //product detail:
+  locator.registerFactory<IProductDetailDatasource>(
+    () => ProductDetailRemoteDatasourceImpl(),
+  );
 
   //repository =>
   //authentication:
@@ -66,5 +75,9 @@ Future<void> setupLocator() async {
   //product:
   locator.registerFactory<IProductRepository>(
     () => ProductRepositoryImpl(),
+  );
+  //product detail:
+  locator.registerFactory<IProductDetailRepository>(
+    () => ProductDetailRepositoryImpl(),
   );
 }

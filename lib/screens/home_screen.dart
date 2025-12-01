@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else {
-          return HomeContent(
+          return HomeScreenContent(
             bannerList: bannerResult.getOrElse(
               () => [],
             ),
@@ -162,14 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HomeContent extends StatelessWidget {
+class HomeScreenContent extends StatelessWidget {
   List<BannerEntity> bannerList;
   List<CategoryEntity> categoryList;
   List<ProductEntity> productList;
   List<ProductEntity> bestSellerProductList;
   List<ProductEntity> hotestProductList;
 
-  HomeContent({
+  HomeScreenContent({
     super.key,
     required this.bannerList,
     required this.categoryList,
