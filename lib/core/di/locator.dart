@@ -7,6 +7,8 @@ import 'package:shop_application/data/datasource/authentication_remote_datasourc
 import 'package:shop_application/data/datasource/banner_datasource.dart';
 import 'package:shop_application/data/datasource/banner_remote_datasource_impl.dart';
 import 'package:shop_application/data/datasource/category_datasource.dart';
+import 'package:shop_application/data/datasource/category_product_datasource.dart';
+import 'package:shop_application/data/datasource/category_product_datasource_impl.dart';
 import 'package:shop_application/data/datasource/category_remote_datasource_impl.dart';
 import 'package:shop_application/data/datasource/product_datasource.dart';
 import 'package:shop_application/data/datasource/product_detail_datasource.dart';
@@ -17,6 +19,8 @@ import 'package:shop_application/data/repository/authentication_repository.dart'
 import 'package:shop_application/data/repository/authentication_repository_impl.dart';
 import 'package:shop_application/data/repository/banner_repository.dart';
 import 'package:shop_application/data/repository/banner_repository_impl.dart';
+import 'package:shop_application/data/repository/category_product_repository.dart';
+import 'package:shop_application/data/repository/category_product_repository_impl.dart';
 import 'package:shop_application/data/repository/category_repository.dart';
 import 'package:shop_application/data/repository/category_repository_impl.dart';
 import 'package:shop_application/data/repository/product_detail_repository.dart';
@@ -58,6 +62,10 @@ Future<void> setupLocator() async {
   locator.registerFactory<IProductDetailDatasource>(
     () => ProductDetailRemoteDatasourceImpl(),
   );
+  //category product:
+  locator.registerFactory<ICategoryProductDatasource>(
+    () => CategoryProductDatasourceImpl(),
+  );
 
   //repository =>
   //authentication:
@@ -79,5 +87,9 @@ Future<void> setupLocator() async {
   //product detail:
   locator.registerFactory<IProductDetailRepository>(
     () => ProductDetailRepositoryImpl(),
+  );
+  //product detail:
+  locator.registerFactory<ICategoryProductRepository>(
+    () => CategoryProductRepositoryImpl(),
   );
 }

@@ -29,7 +29,7 @@ class ProductItem extends StatelessWidget {
       },
       child: Container(
         width: 160,
-        height: 216,
+        height: 217,
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(15),
@@ -117,6 +117,8 @@ class ProductItem extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     product.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: AppTextStyle.sm.copyWith(
                       fontSize: 14,
                       color: AppColors.blackColor,
@@ -145,7 +147,7 @@ class ProductItem extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
+                  horizontal: 9,
                 ),
                 child: Row(
                   children: [

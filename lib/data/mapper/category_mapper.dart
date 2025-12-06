@@ -9,7 +9,7 @@ class CategoryMapper {
     return CategoryEntity(
       categoryDto.collectionId ?? 'N/A',
       categoryDto.collectionName ?? 'N/A',
-      categoryDto.collectionId ?? 'N/A',
+      categoryDto.id ?? 'N/A',
       categoryDto.title ?? 'N/A',
       categoryDto.color ?? 'N/A',
       '${ApiConstants.baseUrl}files/${categoryDto.collectionId}/${categoryDto.id}/${categoryDto.icon}',
