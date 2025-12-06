@@ -1,16 +1,43 @@
-# shop_application
+# E-commerce Practice App (Flutter + BLoC + Clean Architecture + GetIt)
 
-A new Flutter project.
+## Overview
+This is a practice e-commerce app built with **Flutter** to learn **state management using BLoC** and **Clean Architecture** principles.  
+**GetIt** is used for dependency management. The project is designed for practicing mobile app development, state management, and API integration.
 
-## Getting Started
+## Features
+- Display a list of products  
+- Add products to a shopping cart  
+- Checkout flow simulation  
+- Practice API integration and dependency management with GetIt  
 
-This project is a starting point for a Flutter application.
+## Technologies
+- **Flutter**  
+- **Dart**  
+- **BLoC** for state management  
+- **Clean Architecture**  
+- **GetIt** for dependency injection  
 
-A few resources to get you started if this is your first Flutter project:
+## Project Status
+- In progress *(In Development)*  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## How to Run
+1. Clone the repository:  
+   git clone  
+   ```bash
+   https://github.com/pooyaazizi/shop_application.git
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Navigate to the project directory: 
+   ```bash
+   cd shop_application
+
+3. Install dependencies: 
+   ```bash
+   flutter pub get
+
+4. Run the app: 
+   ```bash
+   flutter run
+
+## License
+This project is for learning purposes only.
+
