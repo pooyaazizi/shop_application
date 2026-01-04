@@ -6,7 +6,7 @@ import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/error/api_exception.dart';
 import 'package:shop_application/data/datasource/category_datasource.dart';
 import 'package:shop_application/data/datasource/category_product_datasource.dart';
-import 'package:shop_application/data/dto/product_dto.dart';
+import 'package:shop_application/data/dto/remote/product_dto.dart';
 import 'package:shop_application/data/mapper/product_mapper.dart';
 import 'package:shop_application/domain/entities/category_entity.dart';
 import 'package:shop_application/domain/entities/product_entity.dart';

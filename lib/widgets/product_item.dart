@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_application/bloc/product/product_detail_bloc.dart';
+import 'package:shop_application/bloc/basket/basket_bloc.dart';
+import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
-import 'package:shop_application/core/utils/number_extension.dart';
+import 'package:shop_application/core/utils/extentions/number_extensions.dart';
 import 'package:shop_application/domain/entities/product_entity.dart';
 import 'package:shop_application/screens/product_detail_screen.dart';
 import 'package:shop_application/widgets/cached_image.dart';
@@ -18,8 +19,8 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => BlocProvider(
-              create: (context) => ProductDetailBloc(),
+            builder: (context) => BlocProvider.value(
+              value: locator.get<BasketBloc>(),
               child: ProductDetailScreen(
                 productEntity: product,
               ),

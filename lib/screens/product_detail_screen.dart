@@ -2,13 +2,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shop_application/bloc/basket/basket_bloc.dart';
+import 'package:shop_application/bloc/basket/basket_event.dart';
 import 'package:shop_application/bloc/product/product_detail_bloc.dart';
 import 'package:shop_application/bloc/product/product_detail_event.dart';
 import 'package:shop_application/bloc/product/product_detail_state.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
-import 'package:shop_application/core/utils/string_to_color_extention.dart';
-import 'package:shop_application/data/dto/variant_type_dto.dart';
+import 'package:shop_application/core/utils/extentions/string_extentions.dart';
+import 'package:shop_application/data/dto/remote/variant_type_dto.dart';
 import 'package:shop_application/domain/entities/category_entity.dart';
 import 'package:shop_application/domain/entities/product_entity.dart';
 import 'package:shop_application/domain/entities/product_image_entity.dart';
@@ -34,34 +36,37 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState
     extends State<ProductDetailScreen> {
   @override
-  void initState() {
-    super.initState();
-
-    context.read<ProductDetailBloc>().add(
-      PrtoductDetailInitializeEvent(
-        widget.productEntity.id,
-        widget.productEntity.category,
-      ),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor:
-            AppColors.backgroundScreenColor,
-        body: SafeArea(
-          child:
-              BlocBuilder<
-                ProductDetailBloc,
-                ProductDetailState
-              >(
-                builder: (context, state) {
-                  return _buildByState(state, context);
-                },
-              ),
+    return BlocProvider(
+      create: (context) {
+        var bloc = ProductDetailBloc();
+        bloc.add(
+          PrtoductDetailInitializeEvent(
+            widget.productEntity.id,
+            widget.productEntity.category,
+          ),
+        );
+        return bloc;
+      },
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          backgroundColor:
+              AppColors.backgroundScreenColor,
+          body: SafeArea(
+            child:
+                BlocBuilder<
+                  ProductDetailBloc,
+                  ProductDetailState
+                >(
+                  builder: (context, state) {
+                    return _buildByState(
+                      state,
+                      context,
+                    );
+                  },
+                ),
+          ),
         ),
       ),
     );
@@ -540,7 +545,7 @@ class ProductDetailScreenContent
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween,
                 children: [
-                  AddToBasketButton(),
+                  AddToBasketButton(product: product),
                   PriceTagButton(),
                 ],
               ),
@@ -735,19 +740,6 @@ class _ProductPropertiesWidgetState
                       },
                     ),
                   } else ...{
-                    Center(
-                      child: Text(
-                        'محصول مشخصات فنی ندارد.',
-                        style: AppTextStyle.sm
-                            .copyWith(
-                              fontSize: 12,
-
-                              color:
-                                  AppColors.blackColor,
-                            ),
-                      ),
-                    ),
-
                     Center(
                       child: Text(
                         'محصول مشخصات فنی ندارد.',
@@ -1444,7 +1436,12 @@ class PriceTagButton extends StatelessWidget {
 }
 
 class AddToBasketButton extends StatelessWidget {
-  const AddToBasketButton({super.key});
+  ProductEntity product;
+
+  AddToBasketButton({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1473,37 +1470,49 @@ class AddToBasketButton extends StatelessWidget {
                 sigmaX: 25,
                 sigmaY: 25,
               ),
-              child: Container(
-                width: 160,
-                height: 53,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<ProductDetailBloc>()
+                      .add(
+                        ProductAddToBasket(product),
+                      );
+
+                  context.read<BasketBloc>().add(
+                    BasketFetchFromHiveEvent(),
+                  );
+                },
+                child: Container(
+                  width: 160,
+                  height: 53,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                    color: AppColors.whiteColor
+                        .withValues(alpha: 0.1),
                   ),
-                  color: AppColors.whiteColor
-                      .withValues(alpha: 0.1),
-                ),
 
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Row(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'افزودن به سبد خرید',
-                        style: AppTextStyle.sb
-                            .copyWith(
-                              fontSize: 16,
-                              color:
-                                  AppColors.whiteColor,
-                            ),
-                      ),
-
-                      const SizedBox(width: 10),
-                    ],
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                      mainAxisAlignment:
+                          MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'افزودن به سبد خرید',
+                          style: AppTextStyle.sb
+                              .copyWith(
+                                fontSize: 16,
+                                color: AppColors
+                                    .whiteColor,
+                              ),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
                   ),
                 ),
               ),

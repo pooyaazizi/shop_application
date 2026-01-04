@@ -1,4 +1,4 @@
-import 'package:shop_application/data/dto/product_property_dto.dart';
+import 'package:shop_application/data/dto/remote/product_property_dto.dart';
 import 'package:shop_application/domain/entities/product_property_entity.dart';
 
 class ProductPropertyMapper {

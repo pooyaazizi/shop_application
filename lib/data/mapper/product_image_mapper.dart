@@ -1,5 +1,5 @@
 import 'package:shop_application/core/constants/api_constants.dart';
-import 'package:shop_application/data/dto/product_image_dto.dart';
+import 'package:shop_application/data/dto/remote/product_image_dto.dart';
 import 'package:shop_application/domain/entities/product_image_entity.dart';
 
 class ProductImageMapper {

@@ -12,7 +12,7 @@ class CachedImage extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         errorWidget: (context, url, error) =>
             Container(
               color: AppColors.redColor.withAlpha(26),

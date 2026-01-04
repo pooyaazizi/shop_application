@@ -1,4 +1,4 @@
-import 'package:shop_application/data/dto/product_variant_dto.dart';
+import 'package:shop_application/data/dto/remote/product_variant_dto.dart';
 import 'package:shop_application/domain/entities/product_variant_entity.dart';
 
 class ProductVariantMapper {

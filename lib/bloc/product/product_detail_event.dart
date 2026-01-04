@@ -1,3 +1,5 @@
+import 'package:shop_application/domain/entities/product_entity.dart';
+
 abstract class ProductDetailEvent {}
 
 class PrtoductDetailInitializeEvent
@@ -8,4 +10,9 @@ class PrtoductDetailInitializeEvent
     this.productId,
     this.categoryId,
   );
+}
+
+class ProductAddToBasket extends ProductDetailEvent {
+  ProductEntity product;
+  ProductAddToBasket(this.product);
 }

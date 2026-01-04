@@ -1,5 +1,5 @@
 import 'package:shop_application/core/constants/api_constants.dart';
-import 'package:shop_application/data/dto/banner_dto.dart';
+import 'package:shop_application/data/dto/remote/banner_dto.dart';
 import 'package:shop_application/domain/entities/banner_entity.dart';
 
 class BannerMapper {

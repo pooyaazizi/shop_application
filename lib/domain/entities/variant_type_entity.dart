@@ -1,4 +1,4 @@
-import 'package:shop_application/data/dto/variant_type_dto.dart';
+import 'package:shop_application/data/dto/remote/variant_type_dto.dart';
 
 class VariantTypeEntity {
   String id;

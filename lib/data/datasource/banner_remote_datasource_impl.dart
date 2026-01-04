@@ -3,7 +3,7 @@ import 'package:shop_application/core/constants/api_constants.dart';
 import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/error/api_exception.dart';
 import 'package:shop_application/data/datasource/banner_datasource.dart';
-import 'package:shop_application/data/dto/banner_dto.dart';
+import 'package:shop_application/data/dto/remote/banner_dto.dart';
 import 'package:shop_application/data/mapper/banner_mapper.dart';
 import 'package:shop_application/domain/entities/banner_entity.dart';
 

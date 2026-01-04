@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_application/bloc/basket/basket_bloc.dart';
+import 'package:shop_application/bloc/basket/basket_event.dart';
 import 'package:shop_application/bloc/home/home_bloc.dart';
 import 'package:shop_application/bloc/category/category_bloc.dart';
 import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
 import 'package:shop_application/screens/category_screen.dart';
-import 'package:shop_application/screens/cart_screen.dart';
+import 'package:shop_application/screens/card_screen.dart';
 import 'package:shop_application/screens/home_screen.dart';
 import 'package:shop_application/screens/profile_screen.dart';
 
@@ -198,15 +200,20 @@ class _MyAppState extends State<MyApp> {
   List<Widget> getScreens() {
     return [
       const ProfileScreen(),
-      const CartScreen(),
+
+      BlocProvider(
+        create: (context) => locator.get<BasketBloc>(),
+
+        child: CardScreen(),
+      ),
       BlocProvider(
         create: (context) => CategoryBloc(),
-        child: CategoryScreen(),
+        child: const CategoryScreen(),
       ),
 
       BlocProvider(
         create: (context) => HomeBloc(),
-        child: HomeScreen(),
+        child: const HomeScreen(),
       ),
     ];
   }

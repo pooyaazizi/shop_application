@@ -1,5 +1,5 @@
 import 'package:shop_application/core/constants/api_constants.dart';
-import 'package:shop_application/data/dto/category_dto.dart';
+import 'package:shop_application/data/dto/remote/category_dto.dart';
 import 'package:shop_application/domain/entities/category_entity.dart';
 
 class CategoryMapper {
