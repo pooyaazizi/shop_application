@@ -9,4 +9,6 @@ abstract class ICardItemRepository {
 
   Future<Either<String, List<CardItemEntity>>>
   getAllCardItems();
+
+  Future<int> getBasketFinalPrice();
 }

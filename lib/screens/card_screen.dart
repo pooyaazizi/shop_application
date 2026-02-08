@@ -99,6 +99,7 @@ Widget _buildByState(
                 )
               : CardScreenContent(
                   cardItemList: cardItemList,
+                  basketFinalPrice: state.finalPrice,
                 );
         },
       );
@@ -112,9 +113,11 @@ Widget _buildByState(
 
 class CardScreenContent extends StatelessWidget {
   List<CardItemEntity> cardItemList;
+  int basketFinalPrice;
   CardScreenContent({
     super.key,
     required this.cardItemList,
+    required this.basketFinalPrice,
   });
 
   @override
@@ -205,11 +208,13 @@ class CardScreenContent extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'ادامه فرآیند خرید',
+                '${basketFinalPrice.toSeparated()} تومان',
                 style: AppTextStyle.sb.copyWith(
                   fontSize: 16,
                   color: AppColors.whiteColor,
                 ),
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.rtl,
               ),
             ),
           ),

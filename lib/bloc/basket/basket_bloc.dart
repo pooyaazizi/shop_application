@@ -12,8 +12,14 @@ class BasketBloc
     on<BasketFetchFromHiveEvent>((event, emit) async {
       final cardItemList = await _cardItemRepository
           .getAllCardItems();
-
-      emit(BasketDataFeachedState(cardItemList));
+      final finalPrice = await _cardItemRepository
+          .getBasketFinalPrice();
+      emit(
+        BasketDataFeachedState(
+          cardItemList,
+          finalPrice,
+        ),
+      );
     });
   }
 }

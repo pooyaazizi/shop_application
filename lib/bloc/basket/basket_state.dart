@@ -9,6 +9,9 @@ class BasketLoadingState extends BasketState {}
 
 class BasketDataFeachedState extends BasketState {
   Either<String, List<CardItemEntity>> cardItemList;
-
-  BasketDataFeachedState(this.cardItemList);
+  int finalPrice;
+  BasketDataFeachedState(
+    this.cardItemList,
+    this.finalPrice,
+  );
 }

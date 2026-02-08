@@ -7,4 +7,6 @@ abstract class ICardItemDatasource {
     CardItemDto cardItemDto,
   );
   Future<List<CardItemEntity>> getALLCardItems();
+
+  Future<int> getBasketFinalPrice();
 }

@@ -39,4 +39,11 @@ class CardItemRepositoryImpl
       return left('خطا در نمایش محصولات');
     }
   }
+
+  @override
+  Future<int> getBasketFinalPrice() async {
+    var finalPrice = await _datasource
+        .getBasketFinalPrice();
+    return finalPrice;
+  }
 }

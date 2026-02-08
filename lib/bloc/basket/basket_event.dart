@@ -1,6 +1,3 @@
 abstract class BasketEvent {}
 
-class BasketFetchFromHiveEvent extends BasketEvent {
-  /*   CardItemEntity cardItemEntity;
-  BasketFetchFromHiveEvent(this.cardItemEntity); */
-}
+class BasketFetchFromHiveEvent extends BasketEvent {}

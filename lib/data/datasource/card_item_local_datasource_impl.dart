@@ -20,11 +20,27 @@ class CardItemLocalDatasourceImpl
   @override
   Future<List<CardItemEntity>>
   getALLCardItems() async {
-    List<CardItemDto> cardItemDtoList =
-        await cardItemBox.values.toList();
+    List<CardItemDto> cardItemDtoList = cardItemBox
+        .values
+        .toList();
 
     return CardItemMapper.toDomainList(
       cardItemDtoList,
     );
+  }
+
+  @override
+  Future<int> getBasketFinalPrice() async {
+    var productList = cardItemBox.values.toList();
+
+    int finalPrice = productList.fold(0, (
+      accumulator,
+      product,
+    ) {
+      var cardItem = CardItemMapper.toDomain(product);
+      return accumulator + cardItem.realPrice;
+    });
+
+    return finalPrice;
   }
 }
