@@ -1,3 +1,4 @@
+import 'package:app_links/app_links.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,8 @@ import 'package:shop_application/core/utils/extentions/number_extensions.dart';
 import 'package:shop_application/domain/entities/card_item_entity.dart';
 import 'package:shop_application/widgets/cached_image.dart';
 import 'package:shop_application/widgets/custom_error_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:zarinpal/zarinpal.dart';
 
 class CardScreen extends StatefulWidget {
   CardScreen({super.key});
@@ -26,10 +29,11 @@ class CardScreen extends StatefulWidget {
 class _CardScreenState extends State<CardScreen> {
   @override
   void initState() {
+    super.initState();
+
     context.read<BasketBloc>().add(
       BasketFetchFromHiveEvent(),
     );
-    super.initState();
   }
 
   @override
@@ -114,6 +118,7 @@ Widget _buildByState(
 class CardScreenContent extends StatelessWidget {
   List<CardItemEntity> cardItemList;
   int basketFinalPrice;
+
   CardScreenContent({
     super.key,
     required this.cardItemList,
@@ -197,7 +202,14 @@ class CardScreenContent extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 53,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<BasketBloc>().add(
+                  BasketPaymentInitEvent(),
+                );
+                context.read<BasketBloc>().add(
+                  BasketPaymentRequestEvent(),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.greenColor,
 
