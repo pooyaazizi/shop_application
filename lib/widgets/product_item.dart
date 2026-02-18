@@ -10,8 +10,11 @@ import 'package:shop_application/screens/product_detail_screen.dart';
 import 'package:shop_application/widgets/cached_image.dart';
 
 class ProductItem extends StatelessWidget {
-  ProductEntity product;
-  ProductItem({super.key, required this.product});
+  final ProductEntity product;
+  const ProductItem({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {

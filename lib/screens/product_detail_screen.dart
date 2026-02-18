@@ -7,6 +7,7 @@ import 'package:shop_application/bloc/basket/basket_event.dart';
 import 'package:shop_application/bloc/product/product_detail_bloc.dart';
 import 'package:shop_application/bloc/product/product_detail_event.dart';
 import 'package:shop_application/bloc/product/product_detail_state.dart';
+import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
 import 'package:shop_application/core/utils/extentions/string_extentions.dart';
@@ -21,9 +22,9 @@ import 'package:shop_application/widgets/cached_image.dart';
 import 'package:shop_application/widgets/custom_error_widget.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  ProductEntity productEntity;
+  final ProductEntity productEntity;
 
-  ProductDetailScreen({
+  const ProductDetailScreen({
     super.key,
     required this.productEntity,
   });
@@ -39,7 +40,10 @@ class _ProductDetailScreenState
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        var bloc = ProductDetailBloc();
+        var bloc = ProductDetailBloc(
+          locator.get(),
+          locator.get(),
+        );
         bloc.add(
           PrtoductDetailInitializeEvent(
             widget.productEntity.id,
@@ -183,13 +187,14 @@ class _ProductDetailScreenState
 
 class ProductDetailScreenContent
     extends StatelessWidget {
-  List<ProductImageEntity> productImageList;
-  List<ProductVariantEntity> productVariantList;
-  ProductEntity product;
-  CategoryEntity productCategory;
-  List<ProductPropertyEntity> productPropertyList;
+  final List<ProductImageEntity> productImageList;
+  final List<ProductVariantEntity> productVariantList;
+  final ProductEntity product;
+  final CategoryEntity productCategory;
+  final List<ProductPropertyEntity>
+  productPropertyList;
 
-  ProductDetailScreenContent({
+  const ProductDetailScreenContent({
     super.key,
     required this.productImageList,
     required this.productVariantList,
@@ -534,7 +539,7 @@ class ProductDetailScreenContent
           ),
 
           SliverPadding(
-            padding: EdgeInsetsGeometry.only(
+            padding: const EdgeInsetsGeometry.only(
               top: 38,
               bottom: 32,
               right: 44,
@@ -546,7 +551,7 @@ class ProductDetailScreenContent
                     MainAxisAlignment.spaceBetween,
                 children: [
                   AddToBasketButton(product: product),
-                  PriceTagButton(),
+                  const PriceTagButton(),
                 ],
               ),
             ),
@@ -558,8 +563,9 @@ class ProductDetailScreenContent
 }
 
 class ProductPropertiesWidget extends StatefulWidget {
-  List<ProductPropertyEntity> productPropertyList;
-  ProductPropertiesWidget({
+  final List<ProductPropertyEntity>
+  productPropertyList;
+  const ProductPropertiesWidget({
     super.key,
     required this.productPropertyList,
   });
@@ -673,13 +679,13 @@ class _ProductPropertiesWidgetState
           Visibility(
             visible: isProductPropertiesVisible,
             child: Container(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: 15,
                 bottom: 15,
                 right: 10,
                 left: 10,
               ),
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 20,
                 right: 44,
                 left: 44,
@@ -699,7 +705,9 @@ class _ProductPropertiesWidgetState
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: double.infinity),
+                  const SizedBox(
+                    width: double.infinity,
+                  ),
                   if (widget
                       .productPropertyList
                       .isNotEmpty) ...{
@@ -764,8 +772,8 @@ class _ProductPropertiesWidgetState
 }
 
 class ProductDescription extends StatefulWidget {
-  ProductEntity product;
-  ProductDescription({
+  final ProductEntity product;
+  const ProductDescription({
     super.key,
     required this.product,
   });
@@ -885,7 +893,7 @@ class _ProductDescriptionState
                 left: 44,
               ),
               child: Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 10,
                 ),
@@ -923,8 +931,8 @@ class _ProductDescriptionState
 
 class VariantContainerGenerator
     extends StatelessWidget {
-  List<ProductVariantEntity> productVariants;
-  VariantContainerGenerator({
+  final List<ProductVariantEntity> productVariants;
+  const VariantContainerGenerator({
     super.key,
     required this.productVariants,
   });
@@ -951,8 +959,8 @@ class VariantContainerGenerator
 }
 
 class VariantGeneratorChild extends StatelessWidget {
-  ProductVariantEntity productVariant;
-  VariantGeneratorChild({
+  final ProductVariantEntity productVariant;
+  const VariantGeneratorChild({
     super.key,
     required this.productVariant,
   });
@@ -996,9 +1004,9 @@ class VariantGeneratorChild extends StatelessWidget {
 }
 
 class ColorVariantList extends StatefulWidget {
-  List<VariantEntity> variantList;
+  final List<VariantEntity> variantList;
 
-  ColorVariantList({
+  const ColorVariantList({
     super.key,
     required this.variantList,
   });
@@ -1071,8 +1079,8 @@ class _ColorVariantListState
 }
 
 class StorageVariantList extends StatefulWidget {
-  List<VariantEntity> variantList;
-  StorageVariantList({
+  final List<VariantEntity> variantList;
+  const StorageVariantList({
     super.key,
     required this.variantList,
   });
@@ -1137,10 +1145,9 @@ class _StorageVariantListState
 }
 
 class ProductGalleryWidget extends StatefulWidget {
-  List<ProductImageEntity> productImageList;
-  int selectedItem = 0;
-  String thumbnail;
-  ProductGalleryWidget({
+  final List<ProductImageEntity> productImageList;
+  final String thumbnail;
+  const ProductGalleryWidget({
     super.key,
     required this.productImageList,
     required this.thumbnail,
@@ -1153,6 +1160,7 @@ class ProductGalleryWidget extends StatefulWidget {
 
 class _ProductGalleryWidgetState
     extends State<ProductGalleryWidget> {
+  int selectedItem = 0;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -1188,8 +1196,7 @@ class _ProductGalleryWidgetState
                                     .isEmpty)
                                 ? widget.thumbnail
                                 : widget
-                                      .productImageList[widget
-                                          .selectedItem]
+                                      .productImageList[selectedItem]
                                       .imageUrl,
                           ),
                         ),
@@ -1261,7 +1268,7 @@ class _ProductGalleryWidgetState
                                 return GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      widget.selectedItem =
+                                      selectedItem =
                                           index;
                                     });
                                   },
@@ -1270,8 +1277,8 @@ class _ProductGalleryWidgetState
                                         .productImageList[index],
                                     productIndex:
                                         index,
-                                    selectedItem: widget
-                                        .selectedItem,
+                                    selectedItem:
+                                        selectedItem,
                                   ),
                                 );
                               },
@@ -1343,6 +1350,18 @@ class PriceTagButton extends StatelessWidget {
                           10.0,
                         ),
                         child: Container(
+                          decoration:
+                              const BoxDecoration(
+                                color:
+                                    AppColors.redColor,
+                                borderRadius:
+                                    BorderRadius.all(
+                                      Radius.circular(
+                                        7.5,
+                                      ),
+                                    ),
+                              ),
+
                           child: Padding(
                             padding:
                                 const EdgeInsets.only(
@@ -1361,17 +1380,6 @@ class PriceTagButton extends StatelessWidget {
                                   ),
                             ),
                           ),
-                          decoration:
-                              const BoxDecoration(
-                                color:
-                                    AppColors.redColor,
-                                borderRadius:
-                                    BorderRadius.all(
-                                      Radius.circular(
-                                        7.5,
-                                      ),
-                                    ),
-                              ),
                         ),
                       ),
 
@@ -1436,9 +1444,9 @@ class PriceTagButton extends StatelessWidget {
 }
 
 class AddToBasketButton extends StatelessWidget {
-  ProductEntity product;
+  final ProductEntity product;
 
-  AddToBasketButton({
+  const AddToBasketButton({
     super.key,
     required this.product,
   });
@@ -1462,7 +1470,7 @@ class AddToBasketButton extends StatelessWidget {
           ),
 
           ClipRRect(
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
             child: BackdropFilter(
@@ -1486,9 +1494,10 @@ class AddToBasketButton extends StatelessWidget {
                   width: 160,
                   height: 53,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
+                    borderRadius:
+                        const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
                     color: AppColors.whiteColor
                         .withValues(alpha: 0.1),
                   ),
@@ -1525,10 +1534,10 @@ class AddToBasketButton extends StatelessWidget {
 }
 
 class ProductImageGallery extends StatelessWidget {
-  ProductImageEntity productImage;
-  int productIndex;
-  int selectedItem;
-  ProductImageGallery({
+  final ProductImageEntity productImage;
+  final int productIndex;
+  final int selectedItem;
+  const ProductImageGallery({
     super.key,
     required this.productImage,
     required this.productIndex,

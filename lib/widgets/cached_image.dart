@@ -3,8 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 
 class CachedImage extends StatelessWidget {
-  String imageUrl;
-  CachedImage({super.key, required this.imageUrl});
+  final String imageUrl;
+  const CachedImage({
+    super.key,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {

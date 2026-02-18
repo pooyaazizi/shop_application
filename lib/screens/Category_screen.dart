@@ -97,8 +97,8 @@ class _CategoryScreenState
 }
 
 class CategoryContent extends StatelessWidget {
-  List<CategoryEntity> categoryList;
-  CategoryContent({
+  final List<CategoryEntity> categoryList;
+  const CategoryContent({
     super.key,
     required this.categoryList,
   });
@@ -157,16 +157,16 @@ class CategoryContent extends StatelessWidget {
             ),
           ),
 
-          _ListCategory(categoryList: categoryList),
+          ListCategory(categoryList: categoryList),
         ],
       ),
     );
   }
 }
 
-class _ListCategory extends StatelessWidget {
-  List<CategoryEntity>? categoryList;
-  _ListCategory({
+class ListCategory extends StatelessWidget {
+  final List<CategoryEntity>? categoryList;
+  const ListCategory({
     super.key,
     required this.categoryList,
   });

@@ -12,8 +12,8 @@ import 'package:shop_application/widgets/custom_error_widget.dart';
 import 'package:shop_application/widgets/product_item.dart';
 
 class ProductListScreen extends StatefulWidget {
-  CategoryEntity category;
-  ProductListScreen({
+  final CategoryEntity category;
+  const ProductListScreen({
     super.key,
     required this.category,
   });
@@ -117,9 +117,9 @@ Widget _buildByState(
 }
 
 class ProductListContent extends StatelessWidget {
-  CategoryEntity category;
-  List<ProductEntity> productList;
-  ProductListContent({
+  final CategoryEntity category;
+  final List<ProductEntity> productList;
+  const ProductListContent({
     super.key,
     required this.category,
     required this.productList,

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
@@ -38,21 +36,21 @@ class _TestScreenState extends State<TestScreen> {
 
                   either.fold(
                     (errorMessage) {
-                      print(errorMessage);
+                      // print(errorMessage);
                     },
                     (successMessage) {
-                      print(successMessage);
+                      //    print(successMessage);
                     },
                   );
 
                   if (AuthManager.isLogedin()) {
-                    print(
+                    /*          print(
                       'ورود و ذخیر توکن با موفقیت انجام شده است.',
-                    );
+                    ); */
                   } else {
-                    print(
+                    /*  print(
                       'متاسفانه ذخیره توکن به درستی انجام نشده است',
-                    );
+                    ); */
                   }
                 },
                 child: Text(
@@ -68,9 +66,9 @@ class _TestScreenState extends State<TestScreen> {
                 onPressed: () {
                   AuthManager.logout();
                   if (!AuthManager.isLogedin()) {
-                    print(
+                    /*   print(
                       'خروج و حذف توکن با موفقیت انجام شده است.',
-                    );
+                    ); */
                   }
                 },
                 child: Text(

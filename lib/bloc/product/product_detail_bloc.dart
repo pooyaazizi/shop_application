@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_application/bloc/product/product_detail_event.dart';
 import 'package:shop_application/bloc/product/product_detail_state.dart';
-import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/data/dto/local/card_item_dto.dart';
 import 'package:shop_application/data/repository/card_item_repository.dart';
 import 'package:shop_application/data/repository/product_detail_repository.dart';
@@ -10,11 +9,12 @@ class ProductDetailBloc
     extends
         Bloc<ProductDetailEvent, ProductDetailState> {
   final IProductDetailRepository
-  _productDetailRepository = locator.get();
-  final ICardItemRepository _cardItemRepository =
-      locator.get();
-  ProductDetailBloc()
-    : super(ProductDetailInitiatState()) {
+  _productDetailRepository;
+  final ICardItemRepository _cardItemRepository;
+  ProductDetailBloc(
+    this._productDetailRepository,
+    this._cardItemRepository,
+  ) : super(ProductDetailInitiatState()) {
     on<PrtoductDetailInitializeEvent>((
       event,
       emit,

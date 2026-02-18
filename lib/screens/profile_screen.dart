@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
-import 'package:shop_application/widgets/category_icon_item_chip.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

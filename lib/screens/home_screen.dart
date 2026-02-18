@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element_parameter
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -163,13 +165,13 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenContent extends StatelessWidget {
-  List<BannerEntity> bannerList;
-  List<CategoryEntity> categoryList;
-  List<ProductEntity> productList;
-  List<ProductEntity> bestSellerProductList;
-  List<ProductEntity> hotestProductList;
+  final List<BannerEntity> bannerList;
+  final List<CategoryEntity> categoryList;
+  final List<ProductEntity> productList;
+  final List<ProductEntity> bestSellerProductList;
+  final List<ProductEntity> hotestProductList;
 
-  HomeScreenContent({
+  const HomeScreenContent({
     super.key,
     required this.bannerList,
     required this.categoryList,
@@ -188,24 +190,24 @@ class HomeScreenContent extends StatelessWidget {
       },
       child: CustomScrollView(
         slivers: [
-          _getSearchBox(),
+          const _SearchBox(),
 
-          _getBanners(bannerList: bannerList),
+          _BannerSection(bannerList: bannerList),
 
-          _getCategoryListTitle(),
+          const _CategoryTitle(),
 
-          _getCategoryList(categoryList: categoryList),
+          _CategoryList(categoryList: categoryList),
 
-          _getBestSellerTitle(),
+          const _BestSellerTitle(),
 
-          _getBestSellerProducts(
+          _BestSellerProductList(
             bestSellerProductList:
                 bestSellerProductList,
           ),
 
-          _getMostViewedTitle(),
+          const _MostViewedTitle(),
 
-          _getMostViewedProducts(
+          _MostViewedProductList(
             hotestProductList: hotestProductList,
           ),
         ],
@@ -214,9 +216,9 @@ class HomeScreenContent extends StatelessWidget {
   }
 }
 
-class _getMostViewedProducts extends StatelessWidget {
-  List<ProductEntity> hotestProductList;
-  _getMostViewedProducts({
+class _MostViewedProductList extends StatelessWidget {
+  final List<ProductEntity> hotestProductList;
+  const _MostViewedProductList({
     super.key,
     required this.hotestProductList,
   });
@@ -253,8 +255,8 @@ class _getMostViewedProducts extends StatelessWidget {
   }
 }
 
-class _getMostViewedTitle extends StatelessWidget {
-  const _getMostViewedTitle({super.key});
+class _MostViewedTitle extends StatelessWidget {
+  const _MostViewedTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -295,9 +297,9 @@ class _getMostViewedTitle extends StatelessWidget {
   }
 }
 
-class _getBestSellerProducts extends StatelessWidget {
-  List<ProductEntity> bestSellerProductList;
-  _getBestSellerProducts({
+class _BestSellerProductList extends StatelessWidget {
+  final List<ProductEntity> bestSellerProductList;
+  const _BestSellerProductList({
     super.key,
     required this.bestSellerProductList,
   });
@@ -331,8 +333,8 @@ class _getBestSellerProducts extends StatelessWidget {
   }
 }
 
-class _getBestSellerTitle extends StatelessWidget {
-  const _getBestSellerTitle({super.key});
+class _BestSellerTitle extends StatelessWidget {
+  const _BestSellerTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -373,9 +375,9 @@ class _getBestSellerTitle extends StatelessWidget {
   }
 }
 
-class _getCategoryList extends StatelessWidget {
-  List<CategoryEntity> categoryList;
-  _getCategoryList({
+class _CategoryList extends StatelessWidget {
+  final List<CategoryEntity> categoryList;
+  const _CategoryList({
     super.key,
     required this.categoryList,
   });
@@ -408,8 +410,8 @@ class _getCategoryList extends StatelessWidget {
   }
 }
 
-class _getCategoryListTitle extends StatelessWidget {
-  const _getCategoryListTitle({super.key});
+class _CategoryTitle extends StatelessWidget {
+  const _CategoryTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -436,9 +438,12 @@ class _getCategoryListTitle extends StatelessWidget {
   }
 }
 
-class _getBanners extends StatelessWidget {
-  List<BannerEntity> bannerList;
-  _getBanners({super.key, required this.bannerList});
+class _BannerSection extends StatelessWidget {
+  final List<BannerEntity> bannerList;
+  const _BannerSection({
+    super.key,
+    required this.bannerList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -453,8 +458,8 @@ class _getBanners extends StatelessWidget {
   }
 }
 
-class _getSearchBox extends StatelessWidget {
-  const _getSearchBox({super.key});
+class _SearchBox extends StatelessWidget {
+  const _SearchBox({super.key});
 
   @override
   Widget build(BuildContext context) {

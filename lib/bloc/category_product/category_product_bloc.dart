@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:shop_application/bloc/category_product/category_product_event.dart';
 import 'package:shop_application/bloc/category_product/category_product_state.dart';
-import 'package:shop_application/core/di/locator.dart';
+
 import 'package:shop_application/data/repository/category_product_repository.dart';
 
 class CategoryProductBloc
@@ -10,9 +10,9 @@ class CategoryProductBloc
           CategoryProductEvent,
           CategoryProductState
         > {
-  final ICategoryProductRepository _repository =
-      locator.get();
-  CategoryProductBloc()
+  final ICategoryProductRepository
+  _categoryProductRepository;
+  CategoryProductBloc(this._categoryProductRepository)
     : super(CategoryProductInitializeState()) {
     on<CategoryProductInitializeEvent>((
       event,
@@ -20,8 +20,9 @@ class CategoryProductBloc
     ) async {
       emit(CategoryProductLoadingState());
 
-      final productResult = await _repository
-          .getProductsByCategory(event.categoryId);
+      final productResult =
+          await _categoryProductRepository
+              .getProductsByCategory(event.categoryId);
 
       emit(
         CategoryProductResponseState(productResult),

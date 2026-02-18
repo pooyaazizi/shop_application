@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_application/bloc/basket/basket_bloc.dart';
-import 'package:shop_application/bloc/basket/basket_event.dart';
 import 'package:shop_application/bloc/home/home_bloc.dart';
 import 'package:shop_application/bloc/category/category_bloc.dart';
 import 'package:shop_application/core/di/locator.dart';
@@ -204,15 +203,20 @@ class _MyAppState extends State<MyApp> {
       BlocProvider(
         create: (context) => locator.get<BasketBloc>(),
 
-        child: CardScreen(),
+        child: const CardScreen(),
       ),
       BlocProvider(
-        create: (context) => CategoryBloc(),
+        create: (context) =>
+            CategoryBloc(locator.get()),
         child: const CategoryScreen(),
       ),
 
       BlocProvider(
-        create: (context) => HomeBloc(),
+        create: (context) => HomeBloc(
+          locator.get(),
+          locator.get(),
+          locator.get(),
+        ),
         child: const HomeScreen(),
       ),
     ];

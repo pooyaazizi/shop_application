@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_application/bloc/category_product/category_product_bloc.dart';
+import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
 import 'package:shop_application/core/utils/extentions/string_extentions.dart';
 import 'package:shop_application/domain/entities/category_entity.dart';
@@ -8,9 +9,8 @@ import 'package:shop_application/screens/product_list_screen.dart';
 import 'package:shop_application/widgets/cached_image.dart';
 
 class CategoryIconItemChip extends StatelessWidget {
-  CategoryEntity category;
-
-  CategoryIconItemChip({
+  final CategoryEntity category;
+  const CategoryIconItemChip({
     super.key,
     required this.category,
   });
@@ -25,7 +25,9 @@ class CategoryIconItemChip extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => BlocProvider(
                   create: (context) =>
-                      CategoryProductBloc(),
+                      CategoryProductBloc(
+                        locator.get(),
+                      ),
                   child: ProductListScreen(
                     category: category,
                   ),

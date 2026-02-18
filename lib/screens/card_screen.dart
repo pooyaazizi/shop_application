@@ -1,25 +1,19 @@
-import 'package:app_links/app_links.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import 'package:shop_application/bloc/basket/basket_bloc.dart';
 import 'package:shop_application/bloc/basket/basket_event.dart';
 import 'package:shop_application/bloc/basket/basket_state.dart';
-
 import 'package:shop_application/core/theme/app_colors.dart';
 import 'package:shop_application/core/theme/app_text_style.dart';
 import 'package:shop_application/core/utils/extentions/number_extensions.dart';
-
 import 'package:shop_application/domain/entities/card_item_entity.dart';
 import 'package:shop_application/widgets/cached_image.dart';
 import 'package:shop_application/widgets/custom_error_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:zarinpal/zarinpal.dart';
 
 class CardScreen extends StatefulWidget {
-  CardScreen({super.key});
+  const CardScreen({super.key});
 
   @override
   State<CardScreen> createState() =>
@@ -116,10 +110,10 @@ Widget _buildByState(
 }
 
 class CardScreenContent extends StatelessWidget {
-  List<CardItemEntity> cardItemList;
-  int basketFinalPrice;
+  final List<CardItemEntity> cardItemList;
+  final int basketFinalPrice;
 
-  CardScreenContent({
+  const CardScreenContent({
     super.key,
     required this.cardItemList,
     required this.basketFinalPrice,
@@ -186,7 +180,7 @@ class CardScreenContent extends StatelessWidget {
                 );
               }, childCount: cardItemList.length),
             ),
-            SliverPadding(
+            const SliverPadding(
               padding: EdgeInsets.only(bottom: 93),
             ),
           ],
@@ -245,12 +239,12 @@ class CartItem extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
 
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: 44,
         top: 20,
         right: 44,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: AppColors.grayColor,
@@ -299,7 +293,7 @@ class CartItem extends StatelessWidget {
                               ),
                         ),
 
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
 
                         Text(
                           'گارانتی 18 ماه مدیا پردازش',
@@ -313,7 +307,7 @@ class CartItem extends StatelessWidget {
                               ),
                         ),
 
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
 
                         Wrap(
                           crossAxisAlignment:
@@ -336,7 +330,7 @@ class CartItem extends StatelessWidget {
                                         .grayColor,
                                   ),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
 
                             Text(
                               'تومان',
@@ -350,18 +344,19 @@ class CartItem extends StatelessWidget {
                                   ),
                             ),
 
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Container(
-                              decoration: BoxDecoration(
-                                color:
-                                    AppColors.redColor,
-                                borderRadius:
-                                    BorderRadius.all(
-                                      Radius.circular(
-                                        7.5,
-                                      ),
-                                    ),
-                              ),
+                              decoration:
+                                  const BoxDecoration(
+                                    color: AppColors
+                                        .redColor,
+                                    borderRadius:
+                                        BorderRadius.all(
+                                          Radius.circular(
+                                            7.5,
+                                          ),
+                                        ),
+                                  ),
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(
@@ -384,8 +379,8 @@ class CartItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
-                        Wrap(
+                        const SizedBox(height: 10),
+                        const Wrap(
                           runSpacing: 10,
                           spacing: 10,
                           children: [
@@ -420,8 +415,8 @@ class CartItem extends StatelessWidget {
             ],
           ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 10,
               vertical: 20,
             ),
@@ -447,7 +442,7 @@ class CartItem extends StatelessWidget {
                     color: AppColors.blackColor,
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Text(
                   'تومان',
                   style: AppTextStyle.sm.copyWith(
@@ -458,7 +453,7 @@ class CartItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -476,7 +471,7 @@ class OptionChip extends StatelessWidget {
           width: 1,
           color: AppColors.grayChipBorder,
         ),
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:shop_application/core/di/locator.dart';
 import 'package:shop_application/core/error/api_exception.dart';
 import 'package:shop_application/data/datasource/product_datasource.dart';
 import 'package:shop_application/data/repository/product_repository.dart';
-import 'package:shop_application/domain/entities/category_entity.dart';
 import 'package:shop_application/domain/entities/product_entity.dart';
 
 class ProductRepositoryImpl

@@ -5,8 +5,8 @@ import 'package:shop_application/widgets/cached_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BannerSlider extends StatelessWidget {
-  List<BannerEntity>? bannerEntityList;
-  BannerSlider({
+  final List<BannerEntity>? bannerEntityList;
+  const BannerSlider({
     super.key,
     required this.bannerEntityList,
   });
@@ -55,7 +55,7 @@ class BannerSlider extends StatelessWidget {
           child: SmoothPageIndicator(
             controller: controller,
             count: bannerEntityList?.length ?? 0,
-            effect: ExpandingDotsEffect(
+            effect: const ExpandingDotsEffect(
               expansionFactor: 5,
               dotWidth: 5,
               dotHeight: 5,
